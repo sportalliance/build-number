@@ -3,6 +3,7 @@ const   https = require('https'),
         zlib = require('zlib'),
         fs = require('fs'),
         env = process.env;
+const core = require('@actions/core')
 
 function fail(message, exitCode=1) {
     console.log(`::error::${message}`);
@@ -71,7 +72,8 @@ function main() {
         console.log(`Build number already generated in earlier jobs, using build number ${buildNumber}...`);
         //Setting the output and a environment variable to new build number...
         fs.writeFileSync(process.env.GITHUB_ENV, `BUILD_NUMBER=${buildNumber}`);
-        console.log(`::set-output name=build_number::${buildNumber}`);
+        core.setOutput('build_number', buildNumber);
+        console.log(`setting to build number to ${buildNumber}`);
         return;
     }
     
