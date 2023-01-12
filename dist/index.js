@@ -2888,7 +2888,7 @@ function request(method, path, data, callback) {
 }
 
 
-function index() {
+function main() {
 
     const path = 'BUILD_NUMBER/BUILD_NUMBER';
     const prefix = env.INPUT_PREFIX ? `${env.INPUT_PREFIX}-` : '';
@@ -2960,8 +2960,9 @@ function index() {
             //Setting the output and a environment variable to new build number...
             //fs.writeFileSync('$GITHUB_ENV', `BUILD_NUMBER=${nextBuildNumber}`);
             fs.writeFileSync(process.env.GITHUB_ENV, `BUILD_NUMBER=${nextBuildNumber}`);
- 
-            console.log(`::set-output name=build_number::${nextBuildNumber}`);
+
+            core.setOutput('build_number', buildNumber);
+            console.log(`setting new build number to ${nextBuildNumber}`);
             //Save to file so it can be used for next jobs...
             fs.writeFileSync('BUILD_NUMBER', nextBuildNumber.toString());
             
@@ -2984,7 +2985,7 @@ function index() {
     });
 }
 
-index();
+main();
 
 
 
