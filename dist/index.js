@@ -2961,7 +2961,7 @@ function main() {
             //fs.writeFileSync('$GITHUB_ENV', `BUILD_NUMBER=${nextBuildNumber}`);
             fs.writeFileSync(process.env.GITHUB_ENV, `BUILD_NUMBER=${nextBuildNumber}`);
 
-            core.setOutput('build_number', buildNumber);
+            core.setOutput('build_number', nextBuildNumber);
             console.log(`setting new build number to ${nextBuildNumber}`);
             //Save to file so it can be used for next jobs...
             fs.writeFileSync('BUILD_NUMBER', nextBuildNumber.toString());
